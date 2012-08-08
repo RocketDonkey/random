@@ -1,14 +1,13 @@
 # Google Hurdle Doodle Doer?
 # If you suck at running hurdles I feel bad for you son,
 # I got 99 problems but I can run through hurdles.
-import win32com.client
 import time
+import win32com.client
 
 def CrushIt():
   for i in xrange(0, 1000):
     shell.SendKeys('{LEFT}')
     shell.SendKeys('{RIGHT}')
-    i += 1
 
 # Make the shell
 shell = win32com.client.Dispatch("WScript.Shell")
