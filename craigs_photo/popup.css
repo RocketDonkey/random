@@ -1,0 +1,18 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  min-width:600px;
+  overflow-x:hidden;
+}
+h4 {
+  margin-bottom:0;
+  color:#1155CC;
+}
+p {
+  margin:0;
+  color:#DD4B39;
+}
+
+#url {
+  font-family:'courier';
+  font-size:12px;
+}
