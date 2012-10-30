@@ -5,6 +5,7 @@
  *
  */
 
+// Get selected tab
 chrome.tabs.getSelected(null, function(tab) {
   var tab_url = tab.url;
   var html = '\
