@@ -25,16 +25,16 @@ func (rgbval *rgbval) String() string {
 
 // Convert a comma-separated string of RGB values into a value of type RGB.
 func (rgbval *rgbval) Set(value string) error {
-	rgb_slice := strings.Split(value, ",")
-	if len(rgb_slice) != 3 {
+	rgbSlice := strings.Split(value, ",")
+	if len(rgbSlice) != 3 {
 		return errors.New(
 			"Invalid value for flag rgb. Flag value should be in r,g,b format")
 	}
 
 	// Set the values of the flag.
-	rgbval.red, _ = strconv.ParseInt(rgb_slice[0], 0, 64)
-	rgbval.green, _ = strconv.ParseInt(rgb_slice[1], 0, 64)
-	rgbval.blue, _ = strconv.ParseInt(rgb_slice[2], 0, 64)
+	rgbval.red, _ = strconv.ParseInt(rgbSlice[0], 0, 64)
+	rgbval.green, _ = strconv.ParseInt(rgbSlice[1], 0, 64)
+	rgbval.blue, _ = strconv.ParseInt(rgbSlice[2], 0, 64)
 	return nil
 }
 
@@ -51,32 +51,32 @@ func (rgb *RGB) String() string {
 }
 
 // HexToRGB converts a hex color value to RGB.
-func HexToRGB(hex_val int64) *RGB {
+func HexToRGB(hexVal int64) *RGB {
 	// For a hex value of #AABBCC, the RGB values are:
 	//   R: AA
 	//   G: BB
 	//   B: CC
 
 	// Red: Right-shift the value 16 bits.
-	red := hex_val >> 16
+	red := hexVal >> 16
 
 	// Green: Right-shift 8 bits and then bitwise AND with 8 bits of 1's.
-	green := (hex_val >> 8) & 0xFF
+	green := (hexVal >> 8) & 0xFF
 
 	// Blue: bitwise AND with 8 bits of 1's.
-	blue := hex_val & 0xFF
+	blue := hexVal & 0xFF
 	return &RGB{red, green, blue}
 }
 
 // RGBToHex converts an color value to hex.
-func RGBToHex(rgb_val *rgbval) string {
+func RGBToHex(rgbVal *rgbval) string {
 	// To convert the RGB value to hex, we can convert each individual value to
 	// hex and then concatenate the results together.
 	// Example (R, G, B): (10, 15 20) -> (A, F, 14) -> 0A0F14
 	var buffer bytes.Buffer
-	buffer.WriteString(fmt.Sprintf("%02x", rgb_val.red))
-	buffer.WriteString(fmt.Sprintf("%02x", rgb_val.green))
-	buffer.WriteString(fmt.Sprintf("%02x", rgb_val.blue))
+	buffer.WriteString(fmt.Sprintf("%02x", rgbVal.red))
+	buffer.WriteString(fmt.Sprintf("%02x", rgbVal.green))
+	buffer.WriteString(fmt.Sprintf("%02x", rgbVal.blue))
 	return buffer.String()
 }
 
@@ -94,12 +94,12 @@ func main() {
 
 	if *hexPtr != "" {
 		// Convert the provided hex value into an integer.
-		hex_val, err := strconv.ParseInt(*hexPtr, 16, 32)
+		hexVal, err := strconv.ParseInt(*hexPtr, 16, 32)
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
 		}
-		fmt.Println(HexToRGB(hex_val))
+		fmt.Println(HexToRGB(hexVal))
 	} else {
 		// Convert an RGB value to hex.
 		fmt.Println(RGBToHex(&rgbflag))
